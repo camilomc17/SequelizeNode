@@ -11,7 +11,7 @@ import './models/TypeProduct.js'
 
 async function main(){
 try {
-        await sequelize.sync({force:false}); //is for probar la connection with the tables
+        await sequelize.sync({force:true}); //is for probar la connection with the tables
         console.log('CONNECTION SUCCESSFULLY');
         app.listen(4000);
         console.log('Server is listening in port',4000)   

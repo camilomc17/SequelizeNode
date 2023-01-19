@@ -3,7 +3,7 @@ import {sequelize} from '../database/database.js';//import connection to the dat
 import { Product } from "./Product.js";
 
 export const Person = sequelize.define('persons',{
-    id:{
+    id_person:{
        type:DataTypes.INTEGER,
        autoIncrement:true,
        primaryKey:true
@@ -14,6 +14,9 @@ export const Person = sequelize.define('persons',{
     },
     identificacion:{
         type:DataTypes.INTEGER
+    },
+    fecha_compra:{
+       type:DataTypes.DATE
     }
 },{
     timestamps:true
@@ -21,10 +24,10 @@ export const Person = sequelize.define('persons',{
 
 Person.hasMany(Product,{
     foreignKey:'personId', //como va llmar esa foreignKey
-    sourceKey:'id'//a que se va enlazar
+    sourceKey:'id_person'//a que se va enlazar
 })
 
 Product.belongsTo(Person,{ //many product belong to a person
     foreignKey:'personId',
-    targetId:'id'
+    targetId:'id_person'
 })

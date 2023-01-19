@@ -24,10 +24,10 @@ export const allTypeProducts = async (req,res) =>{
 
 export const updateTypeproduct = async (req, res) =>{
     try {
-    const {id} = req.params;
+    const {id_type_pruduct} = req.params;
     const {type_product} = req.body;
 
-    const updatetype = await TypeProduct.findByPk(id);
+    const updatetype = await TypeProduct.findByPk(id_type_pruduct);
     updatetype.type_product = type_product;
     await updatetype.save();
 
@@ -40,10 +40,10 @@ export const updateTypeproduct = async (req, res) =>{
 
 export const deleteTypeProduct = async (req, res) =>{
    try {
-    const {id} = req.params;
+    const {id_type_pruduct} = req.params;
     await TypeProduct.destroy({
     where:{
-        id,
+        id_type_pruduct,
      },
    });
 

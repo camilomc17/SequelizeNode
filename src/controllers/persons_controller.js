@@ -11,10 +11,10 @@ export const getPersons = async (req, res) => {
 
 export const getPersonId = async (req, res)=>{
 try {
-    const {id} = req.params;
+    const {id_person} = req.params;
     const personid = await Person.findOne({
       where:{
-          id,
+          id_person,
       },
     });
   
@@ -29,10 +29,11 @@ try {
 export const createPerson = async (req, res) => {
   //async va con await
   try {
-    const { name, identificacion } = req.body; //trae los datos el req.body
+    const { name, identificacion, fecha_compra } = req.body; //trae los datos el req.body
     const newPerson = await Person.create({ //await para consult la DB
       name, //se le asignan si son diferentes
       identificacion,
+      fecha_compra,
     });
     res.json(newPerson); //res.json send the data client
   } catch (error) {
@@ -42,12 +43,13 @@ export const createPerson = async (req, res) => {
 
 export const updatePerson = async(req, res) =>{
 try {
-    const { id } = req.params;
-    const { name, identificacion } = req.body;
+    const { id_person } = req.params;
+    const { name, identificacion,fecha_compra } = req.body;
   
-    const personupdate = await Person.findByPk(id);
+    const personupdate = await Person.findByPk(id_person);
     personupdate.name =name;
     personupdate.identificacion = identificacion;
+    personupdate.fecha_compra = fecha_compra;
     await personupdate.save();
   
     res.json(personupdate);
@@ -58,10 +60,10 @@ try {
 
 export const deletePerson = async(req, res) =>{
   try {
-    const {id} = req.params //recibir el parametro para eliminar
+    const {id_person} = req.params //recibir el parametro para eliminar
     await Person.destroy({
     where:{
-        id,
+        id_person,
     },
    });
     res.send('deleting person')

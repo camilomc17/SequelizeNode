@@ -1,16 +1,16 @@
-import XLSX from 'xlsx'
-//var XLSX = require("xlsx");
+import XLSX from 'xlsx';
+import fs from 'fs';
 
-function Excel (ruta) {
-    const excel = XLSX.readFile(ruta);
+function Excel () {
+    const excel = XLSX.readFile('Atributos.xlsx');
     const nombreHoja = excel.SheetNames;
-    //rut "C:\\Users\\Fabrica\\Downloads\\PRACTICA\\ORMsequelize\\Atributos.xlsx
-   // //,{cellDates: true
    const sheet = nombreHoja[0];
-   const data = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-     
-   console.log(data);
+   const datas = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
+   console.log(datas);
+  // fs.writeFile('dta.json',JSON.stringify(datas),'utf-8')
 };
 
+//function read()
+
 //readExcel('Atributos.xlsx');
-Excel('Atributos.xlsx');
+Excel();

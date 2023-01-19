@@ -3,10 +3,13 @@ import { sequelize } from "../database/database.js"; //import connection de la d
 //import { TypeProduct } from "./TypeProduct.js"; 
 
 export const Product = sequelize.define("products",{
-    id:{
+    id_product:{
         type:DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true
+    },
+    name_product:{
+        type:DataTypes.STRING
     },
     precio:{
         type:DataTypes.INTEGER

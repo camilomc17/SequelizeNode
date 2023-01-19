@@ -3,11 +3,12 @@ import { Product } from "../models/Product.js";
 
 export const createProduct = async (req, res) =>{
 try {
-    const {precio,personId,type_productId} = req.body //req.body es lo que vamos a llamar todo el body
+    const {precio,name_product,personid,type_productid} = req.body //req.body es lo que vamos a llamar todo el body
     const newProduct= await Product.create({  //-> instanciamos el model create para crear
     precio,
-    personId,
-    type_productId,
+    name_product,
+    personid,
+    type_productid,
 })
 res.json(newProduct) //->res.json para que lo mande en json la instancia
 } catch (error) {
@@ -17,14 +18,15 @@ res.json(newProduct) //->res.json para que lo mande en json la instancia
 
 export const getProducts = async (req,res)=>{
   try {
-    const {id} = req.params;
+    const {id_product} = req.params;
 
   const newlistProduct = await Product.findOne({
-  where:{id},
+  where:{id_product},
   atributtes:[
      'precio',
-     'personId',
-     'type_productId']
+     'name_product',
+     'personid',
+     'type_productid']
   })
   res.json(newlistProduct);
 } catch (error) {
@@ -35,11 +37,12 @@ export const getProducts = async (req,res)=>{
 
 export const AllProducts = async (req,res)=>{
  try {
-    const {precio,personId,type_productId}=req.body
+    const {precio,name_product,personid,type_productid}=req.body
  const Products = await Product.findAll({
     precio,
-    personId,
-    type_productId,
+    name_product,
+    personid,
+    type_productid,
  })
  res.json(Products) 
  } catch (error) {
@@ -50,11 +53,11 @@ export const AllProducts = async (req,res)=>{
 
 export const UpdateProduct = async (req,res)=>{
     try {
-    const {id} = req.params;
-    const {precio , personId, type_productId} = req.body;
+    const {id_product} = req.params;
+    const {precio ,name_product, personid, type_productid} = req.body;
   
     const updateProduct = await Product.findOne({
-        where:{ id },
+        where:{ id_product },
     });
     updateProduct.set(req.body);//object set() sirve para utilizar solamente un elemento del body
         await updateProduct.save();
@@ -67,10 +70,10 @@ export const UpdateProduct = async (req,res)=>{
 
 
 export const DeleteProduct = async (req,res)=>{
-    const { id }= req.params;
+    const { id_product }= req.params;
     try {
         const result = await Product.destroy({
-        where:{ id },
+        where:{ id_product },
     });
     console.log(result);
      return res.sendStatus(204);
